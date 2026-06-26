@@ -8,7 +8,7 @@ You are a knowledge base lookup skill for **uv** (astral-sh/uv), the extremely f
 
 ## Steps
 
-The knowledge base lives at `~/00-projects/personal/turboBasic/uv-doc`. It has two layers:
+The knowledge base lives at the skill's repo root, `${CLAUDE_SKILL_DIR}/../../..`. It has two layers:
 
 - `cards/` — curated Knowledge Cards (the primary answer source).
 - `src/` — a version-tracked mirror of the upstream uv docs (synced via `./sync-docs.sh`).
@@ -18,13 +18,13 @@ The knowledge base lives at `~/00-projects/personal/turboBasic/uv-doc`. It has t
 1. Based on the user's question, identify which category directory is relevant (see topic routing below).
 
 2. List files in the relevant directory to find matching cards:
-   `find ~/00-projects/personal/turboBasic/uv-doc/cards/<category>/ -name "*.md" | sort`
+   `find ${CLAUDE_SKILL_DIR}/../../../cards/<category>/ -name "*.md" | sort`
 
 3. If the right card isn't obvious from the filename, grep for the relevant keyword:
-   `grep -rln "<keyword>" ~/00-projects/personal/turboBasic/uv-doc/cards/`
+   `grep -rln "<keyword>" ${CLAUDE_SKILL_DIR}/../../../cards/`
 
 4. If no card covers the topic, fall back to the upstream mirror in `src/`:
-   `grep -rln "<keyword>" ~/00-projects/personal/turboBasic/uv-doc/src/`
+   `grep -rln "<keyword>" ${CLAUDE_SKILL_DIR}/../../../src/`
    The full CLI reference is `src/reference/cli.md`, all settings are in
    `src/reference/settings.md`, and environment variables in `src/reference/environment.md`
    (these three are generated and may be absent if `sync-docs.sh` ran without `cargo`).
